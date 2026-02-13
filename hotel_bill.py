@@ -4,6 +4,7 @@ price = {"pizza":10,"burger":7.5,"shawarma":7.5,"coolcake":15,"pasta":8,"biryani
 grocery_items = []
 amount = 0
 quant = 0
+
 menu =input("You Want Menu Card[Y/N] :").lower()
 if "y" == menu:
     print("------------------------------------")
@@ -13,25 +14,26 @@ if "y" == menu:
     print("------------------------------------")
     print(" Items                 Prices       ")
     print("------------------------------------")
-    print(" 1.Pizza                10 $\n",
-        "2.Burger              7.5 $\n",
-        "3.Shawarma            7.5 $\n",
-        "4.Cool_cake           15 $ / kg\n",
-        "5.Pasta               8 $\n",
-        "6.Biryani             15 $\n",
-        "7.Tea                 4 $\n",
-        "8.coffee              4 $")
-    print("------------------------------------") 
+    for i,(item,cost) in enumerate(price.items(),start=1):
+        print(f"{i}.{item:<20} ${cost}")
+    print("------------------------------------")   
 elif "n" == menu:
     print("Okay Thank You ")
 else:
     print("Choose any one option [Y/N]......")
+
 while True:
     item_name = input("Enter the item what do you want to order [or type ok to finish] : ").strip().lower()
     if item_name == "ok":
         break
     if item_name  not in price:
-        print("item not found in Grocery list.....\n")
+        try:
+            new_price = float(input("Enter the cost of new item : "))
+            price[item_name] = new_price
+            print("New item is added to Grocery list\n")
+            
+        except ValueError:
+            print("Invalid name or price")
         continue
     prices = price[item_name]
     try:
@@ -45,6 +47,8 @@ while True:
     amount += item_total
     grocery_items.append([item_name,prices,quantity,item_total])
     print("Items added to cart!!!\n")
+
+    
     
     
 
@@ -56,9 +60,6 @@ while True:
             print("            Welcome To My Shop        ")
             print("-"*40)
             print("Item    cost/item    qunatity      Total")
-            #print("-"*40)
-            #print("-"*40)
-            #print(f"{item_name:<12}{prices:<12}{quantity:<12}{amount:<12}")
             print("-"*40)
         
             for item in grocery_items:
@@ -80,7 +81,18 @@ while True:
 
     else:
         print("you enter wrong word .......")
+    print("Choose any one option [Y/N]......")
 view_bill()
+
+
+            
+
+
+    
+
+    
+    
+
    
             
    
